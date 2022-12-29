@@ -1,6 +1,7 @@
 from numpy import array, random
 from scipy.special import softmax
 
+
 def scaled_dot_product_attention(queries, keys, values, mask):
     # We now score the query vectors against all the key
     # vectors.
@@ -29,8 +30,6 @@ def scaled_dot_product_attention(queries, keys, values, mask):
     return attention
 
 
-
-
 # TEST RUN:
 # In this tutorial, we will discover the attention mechanism and its
 # implementation. Specifically we will learn:
@@ -57,11 +56,11 @@ print("Words:{}\n".format(words))
 # Here for practical purpose we generate these weight matrices randomly, but
 # in a real scenario these would have been learned during training.
 random.seed(42)  # to allow us to reproduce the same attention values
-W_Q = random.randint(3, size=(3,3))
+W_Q = random.randint(3, size=(3, 3))
 print("W_Q:{}".format(W_Q))
-W_K = random.randint(3, size=(3,3))
+W_K = random.randint(3, size=(3, 3))
 print("W_K:{}".format(W_K))
-W_V = random.randint(3, size=(3,3))
+W_V = random.randint(3, size=(3, 3))
 print("W_V:{}\n".format(W_V))
 
 # Next, we generate the query, key, value vectors for each word, by
@@ -73,15 +72,4 @@ print("K:{}".format(K))
 V = words @ W_V
 print("V:{}\n".format(V))
 
-scaled_dot_product_attention(Q,K,V,None)
-
-
-
-
-
-
-
-
-
-
-
+scaled_dot_product_attention(Q, K, V, None)

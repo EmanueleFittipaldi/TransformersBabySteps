@@ -4,3 +4,4 @@ With this repository I would like to get to know the world of transformers a lit
 - Step by step course https://machinelearningmastery.com/start-here/#attention
 - The transformer architecture (Sebastian Rasschka) https://youtu.be/tstbZXNCfLY
 - Multi-head self attention (Sebastian Rasschka) https://youtu.be/A1eUVxscNq8
+- Transformer architecture simple explaination (Code Emporium) https://youtu.be/TQQlZhbC5ps

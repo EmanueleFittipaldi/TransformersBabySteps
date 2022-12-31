@@ -5,3 +5,4 @@ With this repository I would like to get to know the world of transformers a lit
 - The transformer architecture (Sebastian Rasschka) https://youtu.be/tstbZXNCfLY
 - Multi-head self attention (Sebastian Rasschka) https://youtu.be/A1eUVxscNq8
 - Transformer architecture simple explaination (Code Emporium) https://youtu.be/TQQlZhbC5ps
+- Position Embeddings explained (Hedu Al) https://youtu.be/dichIcUZfOw

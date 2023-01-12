@@ -3,6 +3,9 @@ from numpy import random
 from tensorflow import reshape, shape, transpose
 from DotProductAttention import DotProductAttention
 
+# Multi-head self attention is exactly the same process for computing
+# DotProductAttention but repeated h times.
+
 
 # Theory:
 # Each multi-head attention block is made up of four consecutive levels:
@@ -73,25 +76,25 @@ class MultiHeadAttention(Layer):
     def call(self, queries, keys, values, mask=None):
         # Rearrange the queries to be able to compute all heads in parallel
         q_reshaped = self.reshape_tensor(self.W_q(queries), self.heads, True)
-        print("queries reshaped shape:{}".format(q_reshaped.shape))
+        #print("queries reshaped shape:{}".format(q_reshaped.shape))
 
         # Rearrange the keys to be able to compute all heads in parallel
         k_reshaped = self.reshape_tensor(self.W_k(keys), self.heads, True)
-        print("keys reshaped shape:{}".format(k_reshaped.shape))
+        #print("keys reshaped shape:{}".format(k_reshaped.shape))
 
         # Rearrange the values to be able to compute all heads in parallel
         v_reshaped = self.reshape_tensor(self.W_v(values), self.heads, True)
-        print("values reshaped shape:{}".format(v_reshaped.shape))
+        #print("values reshaped shape:{}".format(v_reshaped.shape))
 
         # Compute the multi-head attention output using the reshaped queries, keys and values
         o_reshaped = self.attention(q_reshaped, k_reshaped, v_reshaped, self.d_k, mask)
-        print("output multi-head attention shape:{}".format(o_reshaped.shape))
+        #print("output multi-head attention shape:{}".format(o_reshaped.shape))
 
         # Once we have generated the multi-head attention output from all the attention
         # heads, the final steps are to concatenate back all outputs together and
         # passing the result through one final dense layer.
         output = self.reshape_tensor(o_reshaped, self.heads, False)
-        print("Concatenation shape:{}".format(output.shape))
+        #print("Concatenation shape:{}".format(output.shape))
         # Resulting tensor shape: (batch_size, input_seq_length, d_v)
 
         # Apply one final linear projection to the output to generate the multi-head attention
@@ -102,31 +105,33 @@ class MultiHeadAttention(Layer):
 # Testing the code
 # Here we are working with the parameter values as specified in the paper
 # "Attention" Is All You Need" by Vaswani et al. (2017)
-T = 4  # 5 Maximum length of the input sequence
-d_keys = 64  # 64 Dimensionality of the linearly projected queries and keys
-d_values = 64  # 64 Dimensionality of the linearly projected values
-d_embedding = 512  # Dimension of the word embeddings
-h = 8  # Number of self-attention heads
-batch_size = 1  # 64 How many different sentences to compute
 
-print("T, length of the input sequence:{}\n"
-      "d_keys, shape of the keys K matrix:{}\n"
-      "d_values, shape of the values V matrix:{}\n"
-      "d_embedding, shape of the word embedding:{}\n"
-      "h, number of heads:{}\n"
-      "batch_size, how many sentence to compute simultaneouslt:{}".format(T, d_keys, d_values, d_embedding, h,
-                                                                          batch_size))
+#T = 4  # 5 Maximum length of the input sequence
+#d_keys = 64  # 64 Dimensionality of the linearly projected queries and keys
+#d_values = 64  # 64 Dimensionality of the linearly projected values
+#d_embedding = 512  # Dimension of the word embeddings
+#h = 8  # Number of self-attention heads
+#batch_size = 1  # 64 How many different sentences to compute
+
+#print("T, length of the input sequence:{}\n"
+#      "d_keys, shape of the keys K matrix:{}\n"
+#      "d_values, shape of the values V matrix:{}\n"
+#      "d_embedding, shape of the word embedding:{}\n"
+#      "h, number of heads:{}\n"
+#      "batch_size, how many sentence to compute simultaneouslt:{}".format(T, d_keys, d_values, d_embedding, h,
+#                                                                          batch_size))
 
 # Until we will actual train the complete transformer model, we are going to
 # use dummy data. In the complete Transformer model, values for the sequence
 # length and the queries, keys and values will be obtained through a process of
 # word tokenization and embedding.
-queries = random.random((batch_size, T, d_keys))
-print("Queries shape:{}".format(queries.shape))
-keys = random.random((batch_size, T, d_keys))
-print("Keys shape:{}".format(keys.shape))
-values = random.random((batch_size, T, d_values))
-print("values shape:{}".format(values.shape))
 
-multihead_attention = MultiHeadAttention(h, d_keys, d_values, d_embedding)
-print("Multi-head attention shape:{}".format(multihead_attention(queries, keys, values).shape))
+#queries = random.random((batch_size, T, d_keys))
+#print("Queries shape:{}".format(queries.shape))
+#keys = random.random((batch_size, T, d_keys))
+#print("Keys shape:{}".format(keys.shape))
+#values = random.random((batch_size, T, d_values))
+#print("values shape:{}".format(values.shape))
+
+#multihead_attention = MultiHeadAttention(h, d_keys, d_values, d_embedding)
+#print("Multi-head attention shape:{}".format(multihead_attention(queries, keys, values).shape))

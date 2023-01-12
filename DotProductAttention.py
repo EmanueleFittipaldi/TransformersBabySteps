@@ -15,6 +15,7 @@ class DotProductAttention(Layer):
     def call(self, queries, keys, values, d_k, mask=None):
         # Scores = (Q * K^T) / sqrt(d_k)
         scores = matmul(queries, keys, transpose_b=True) / math.sqrt(cast(d_k, float32))
+        #print("Attention values:{}".format(scores))
 
         # Apply mask to the attention scores. The mask will contain either 0
         # values to indicate that the corresponding token in the input
@@ -35,10 +36,9 @@ class DotProductAttention(Layer):
 # Here we are working with the parameter values as specified in the paper
 # "Attention" Is All You Need" by Vaswani et al. (2017)
 
-
-#d_k = 64  # 64 Dimensionality of the linearly projected queries and keys
-#d_v = 64  # 64 Dimensionality of the linearly projected values
-#batch_size = 64 # 64 How many "packets" of #input_seq_length to process
+#d_k = 3  # 64 Dimensionality of the linearly projected queries and keys
+#d_v = 3  # 64 Dimensionality of the linearly projected values
+#batch_size = 1 # 64 How many "packets" of #input_seq_length to process
 #input_seq_length = 5  # 5 Maximum length of the input sequence
 
 
